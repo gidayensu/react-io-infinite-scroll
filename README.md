@@ -181,6 +181,7 @@ If no `triggerIndex` is provided, the hook uses percentage-based triggers throug
 - `"75%"`: Triggers fetch at three-quarters through the list
 - `"100%"`: Traditional bottom-of-list trigger (default)
 
+
 ## Why Fallback Ref?
 
 The fallback reference system is a crucial feature that handles edge cases where users scroll very rapidly through the content. In such scenarios:
@@ -188,6 +189,52 @@ The fallback reference system is a crucial feature that handles edge cases where
 1. The primary observer might miss the intersection event if the user scrolls too quickly past the trigger point
 2. The fallback ref, always placed at the last item, ensures that the fetch trigger isn't missed
 3. The hook maintains a session storage check to prevent duplicate fetches if both observers trigger
+
+
+## Performance Recommendations
+
+### Virtualization for Large Lists
+
+When dealing with large lists (500+ items), it's strongly recommended to use this hook in combination with virtualization libraries:
+
+```jsx
+import useFetchOnScroll from 'react-granular-infinite-scroll';
+import { FixedSizeList } from 'react-window';
+
+const VirtualizedList = () => {
+  const { ItemRef, fallbackRef, itemRefIndex, fallBackRefIndex } = useFetchOnScroll({
+    fetchNext: fetchMore,
+    numberOfItems: items.length,
+    triggerIndex: Math.floor(items.length / 7)
+  });
+
+  const Row = ({ index, style }) => (
+    <div 
+      style={style}
+      data-id={index}
+      ref={index === itemRefIndex ? ItemRef : index === fallBackRefIndex ? fallbackRef : null}
+    >
+      {items[index].content}
+    </div>
+  );
+
+  return (
+    <FixedSizeList
+      height={500}
+      width="100%"
+      itemCount={items.length}
+      itemSize={50}
+    >
+      {Row}
+    </FixedSizeList>
+  );
+};
+```
+
+Recommended virtualization libraries:
+- `react-window`: Lightweight, modern virtualization library
+- `react-virtualized`: Full-featured virtualization library with additional components
+
 
 ## API
 
