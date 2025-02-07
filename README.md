@@ -1,4 +1,8 @@
 # react granular infinite scroll
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Version](https://img.shields.io/badge/version-0.1.0-orange)
+![All Contributors](https://img.shields.io/badge/all_contributors-1-blue)
 
 A React hook for implementing infinite scroll with granular control over the trigger point and fallback mechanism for fast scrolling scenarios.
 
