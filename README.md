@@ -1,4 +1,4 @@
-# useFetchOnScroll
+# react granular infinite scroll
 
 A React hook for implementing infinite scroll with granular control over the trigger point and fallback mechanism for fast scrolling scenarios.
 
