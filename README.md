@@ -72,6 +72,7 @@ The hook relies on the `data-id` attribute to track item indexes during scrollin
   <div 
     key={item.id}
     ref={index === itemRefIndex ? ItemRef : index === fallBackRefIndex ? fallbackRef : null}
+    
   >
     {item.content}
   </div>
@@ -82,7 +83,7 @@ The hook relies on the `data-id` attribute to track item indexes during scrollin
 ## Usage
 
 ```jsx
-import useFetchOnScroll from 'use-fetch-on-scroll';
+import useFetchOnScroll from 'react-granular-infinite-scroll';
 
 const YourComponent = () => {
   const fetchMore = () => {
